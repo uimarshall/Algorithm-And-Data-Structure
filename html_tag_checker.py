@@ -17,6 +17,9 @@ s = Stack()
 #===========================================================================
 #Takes the file and extracts the opening and closing tags from  the html file
 def read_file(filename):
+    """This function takes an html file as an input and returns a list
+     containing all the characters as items int the list except the newline
+     character and space"""
     with open(filename,'r') as f:
         reader = f.read()
         file_char = []
@@ -30,23 +33,29 @@ def read_file(filename):
 #===========================================================================
 #Takes the output from read_file function, extracts only the html symbols and rearranges them
 def remove_unwanted_char(html_ls):
-    html_open_tag = []
-    html_close_tag = []
+    """Takes in a list of all individual characters in an html file and creates
+    a new list containing all opening angle brackets followed by the closing
+    angle brackets"""
+    html_open_tags = []
+    html_close_tags = []
     for char in file_char:
         if char == "<":
-            html_open_tag.append(char)
+            html_open_tags.append(char)
         elif char == ">":
-            html_close_tag.append(char)
+            html_close_tags.append(char)
     #appending the closing tag to the openiing tag
-    for char in html_close_tag:
-        html_open_tag.append(char)
+    for char in html_close_tags:
+        html_open_tags.append(char)
     #list_symbol_string = str(new_symbol_open_string)
     #print(html_open_tag)
-    return html_open_tag
+    return html_open_tags
 
 #===========================================================================
 #Takes the output from remove_unwanted_char and checks if symbols balance up
 def html_tag_checker(symbol_list):
+    """This function takes in a list containing html opening then closing
+    angle brackets. It returns True if all opening and closing brackets
+    balance out and returns False otherwise"""
     s = Stack()
     balanced = True
     index = 0
